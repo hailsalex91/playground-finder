@@ -1,7 +1,7 @@
-# Create your views here.
-from django.http import render, get_object_or_404, redirect, render_to_response
+# Create your views here local -- playgroundApp/views.py
+from django.shortcuts import render, get_object_or_404, redirect, render_to_response
 from playgroundApp.models import Playground
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.core.paginator import Paginator, EmptyPage
 from playgroundApp.forms import addPlaygroundForm
 
 
@@ -44,12 +44,12 @@ def suggestPlayground(request):
 	#return render (request, 'playgroundApp/new_playground.html', { 'form': form, })
 	return render (request, "playgroundApp/playgroundSuggest.html")
 def useProfile (request):
-	
+
 	#User=get_object_or_404 (Playground)
         #return render (request, 'playgroundApp/user_info.html', {"User": User})
 	return (request, "playgroundApp/userProfile.html")
 def userLogin (request):
-	
+
 	if request.method=='POST':
 		form=login()
 	else:
@@ -57,7 +57,7 @@ def userLogin (request):
 	if form.is_valid():
 		User=User.objects.all().filter(name=form.clean_data['name'])
 		return render (request, "playgroundApp/user_profile.html", {'User': User})
-	
+
 	return render (request, "playgroundApp/user_login.html", {'form': form,})
 
 def userSignUp(request):
